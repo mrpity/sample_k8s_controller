@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
+	clientset "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
