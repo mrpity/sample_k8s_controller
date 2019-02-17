@@ -19,7 +19,6 @@ package main
 import (
 	"flag"
 	"log"
-	"math"
 	"math/rand"
 	"net/http"
 	"time"
@@ -48,55 +47,22 @@ var (
 		},
 		[]string{"service"},
 	)
-	// The same as above, but now as a histogram, and only for the normal
-	// distribution. The buckets are targeted to the parameters of the
-	// normal distribution, with 20 buckets centered on the mean, each
-	// half-sigma wide.
-	rpcDurationsHistogram = prometheus.NewHistogram(prometheus.HistogramOpts{
-		Name:    "rpc_durations_histogram_seconds",
-		Help:    "RPC latency distributions.",
-		Buckets: prometheus.LinearBuckets(*normMean-5**normDomain, .5**normDomain, 20),
-	})
 )
 
 func init() {
 	// Register the summary and the histogram with Prometheus's default registry.
 	prometheus.MustRegister(rpcDurations)
-	prometheus.MustRegister(rpcDurationsHistogram)
 }
 
 func main() {
 	flag.Parse()
-
-	start := time.Now()
-
-	oscillationFactor := func() float64 {
-		return 2 + math.Sin(math.Sin(2*math.Pi*float64(time.Since(start))/float64(*oscillationPeriod)))
-	}
 
 	// Periodically record some sample latencies for the three services.
 	go func() {
 		for {
 			v := rand.Float64() * *uniformDomain
 			rpcDurations.WithLabelValues("uniform").Observe(v)
-			time.Sleep(time.Duration(100*oscillationFactor()) * time.Millisecond)
-		}
-	}()
-
-	go func() {
-		for {
-			v := (rand.NormFloat64() * *normDomain) + *normMean
-			rpcDurations.WithLabelValues("normal").Observe(v)
-			rpcDurationsHistogram.Observe(v)
-			time.Sleep(time.Duration(75*oscillationFactor()) * time.Millisecond)
-		}
-	}()
-
-	go func() {
-		for {
-			v := rand.ExpFloat64() / 1e6
-			rpcDurations.WithLabelValues("exponential").Observe(v)
-			time.Sleep(time.Duration(50*oscillationFactor()) * time.Millisecond)
+			time.Sleep(10 * time.Millisecond)
 		}
 	}()
 
