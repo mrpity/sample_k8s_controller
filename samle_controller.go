@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 
@@ -39,15 +38,9 @@ func main() {
 		panic(err)
 	}
 
-	podList, err := clientset.CoreV1().Pods("").List(metav1.ListOptions{})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// ConfgiMapList, err := clientset.CoreV1.ConfgiMapList
-	// fmt.Println("There are", len(ConfgiMapList.Items), "ConfigMaps in the cluster:")
-	// for _, i := range ConfgiMapList.Items {
-	// 	fmt.Println(i)
+	// podList, err := clientset.CoreV1().Pods("").List(metav1.ListOptions{})
+	// if err != nil {
+	// 	log.Fatal(err)
 	// }
 
 	// fmt.Println("There are", len(podList.Items), "pods in the cluster:")
@@ -55,19 +48,19 @@ func main() {
 	// 	fmt.Println(i.ObjectMeta.Name)
 	// }
 
-	namespace := "test-monitor"
+	CustomNamespace := "test-monitor"
 	// Create Namespace
 	fmt.Println("Creating Namespace...")
 	// Create Namespace Spec(json)
-	nsSpec := &v1.Namespace{ObjectMeta: metav1.ObjectMeta{Name: namespace}}
+	nsSpec := &v1.Namespace{ObjectMeta: metav1.ObjectMeta{Name: CustomNamespace}}
 	// Create Namespace from Spec
-	_, err := clientset.CoreV1().Namespaces().Create(nsSpec)
+	nsResult, err := clientset.CoreV1().Namespaces().Create(nsSpec)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Created namespace %q.\n", namespace)
+	fmt.Printf("Created namespace %q.\n", nsResult)
 
-	deploymentsClient := clientset.AppsV1().Deployments(namespace)
+	deploymentsClient := clientset.AppsV1().Deployments(CustomNamespace)
 
 	deployment := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
