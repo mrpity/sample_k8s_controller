@@ -37,6 +37,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// ConfgiMapList, err := clientset.CoreV1.ConfgiMapList
+	// fmt.Println("There are", len(ConfgiMapList.Items), "ConfigMaps in the cluster:")
+	// for _, i := range ConfgiMapList.Items {
+	// 	fmt.Println(i)
+	// }
+
 	fmt.Println("There are", len(podList.Items), "pods in the cluster:")
 	for _, i := range podList.Items {
 		fmt.Println(i.ObjectMeta.Name)
