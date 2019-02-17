@@ -10,6 +10,7 @@ import (
 
 	appsv1 "k8s.io/api/apps/v1"
 	apiv1 "k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -49,12 +50,24 @@ func main() {
 	// 	fmt.Println(i)
 	// }
 
-	fmt.Println("There are", len(podList.Items), "pods in the cluster:")
-	for _, i := range podList.Items {
-		fmt.Println(i.ObjectMeta.Name)
-	}
+	// fmt.Println("There are", len(podList.Items), "pods in the cluster:")
+	// for _, i := range podList.Items {
+	// 	fmt.Println(i.ObjectMeta.Name)
+	// }
 
-	deploymentsClient := clientset.AppsV1().Deployments(apiv1.NamespaceDefault)
+	namespace := "test-monitor"
+	// Create Namespace
+	fmt.Println("Creating Namespace...")
+	// Create Namespace Spec(json)
+	nsSpec := &v1.Namespace{ObjectMeta: metav1.ObjectMeta{Name: namespace}}
+	// Create Namespace from Spec
+	_, err := clientset.CoreV1().Namespaces().Create(nsSpec)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Created namespace %q.\n", namespace)
+
+	deploymentsClient := clientset.AppsV1().Deployments(namespace)
 
 	deployment := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
