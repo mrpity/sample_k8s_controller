@@ -17,7 +17,7 @@ data "vsphere_datastore" "datastore" {
 }
 
 data "vsphere_resource_pool" "pool" {
-  name          = "WSEC_General_Test_RP"
+  name          = "gc-cl-01/Resources/CustomerRP/WSEC_General_Test_RP"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
