@@ -32,7 +32,7 @@ data "vsphere_network" "network" {
 }
 
 data "vsphere_virtual_machine" "template" {
-  name          = "wsec_k8s_tmplt"
+  name          = "CustomerVM/WSEC/wsec_k8s_tmplt"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
@@ -56,23 +56,23 @@ resource "vsphere_virtual_machine" "vm" {
     label = "disk0"
     size  = "${data.vsphere_virtual_machine.template.disks.0.size}"
   }
-  clone {
-    template_uuid = "${data.vsphere_virtual_machine.template.id}"
+  # clone {
+  #   template_uuid = "${data.vsphere_virtual_machine.template.id}"
  
-    customize {
-      linux_options {
-        host_name = "terraform-test"
-        domain    = "dev.whirl.sg"
-      }
+  #   customize {
+  #     linux_options {
+  #       host_name = "terraform-test"
+  #       domain    = "dev.whirl.sg"
+  #     }
  
-      network_interface {
-        ipv4_address = "10.1.20.158"
-        ipv4_netmask = 24
-      }
+  #     network_interface {
+  #       ipv4_address = "10.1.20.158"
+  #       ipv4_netmask = 24
+  #     }
  
-      ipv4_gateway = "10.1.20.1"
-    }
-  }
+  #     ipv4_gateway = "10.1.20.1"
+  #   }
+  # }
 
 
 }
