@@ -105,6 +105,7 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Created deployment %q.\n", result.GetObjectMeta().GetName())
+	fmt.Print(result)
 
 	// Update Deployment
 	prompt()
