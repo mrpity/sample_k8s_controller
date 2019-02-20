@@ -36,26 +36,37 @@ data "vsphere_virtual_machine" "template" {
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
-resource "vsphere_virtual_machine" "vm" {
+########## EXAMPLE: Creating Resource Pool ###########
+# data "vsphere_resource_pool" "mainpool" {
+#   name          = "gc-cl-01/Resources/CustomerRP/"
+#   datacenter_id = "${data.vsphere_datacenter.dc.id}"
+# }
 
-  name             = "terraform-test"
-  resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
-  datastore_id     = "${data.vsphere_datastore.datastore.id}"
+# resource "vsphere_resource_pool" "main" {
+#   name          = "FIFA"
+#   parent_resource_pool_id = "${data.vsphere_resource_pool.mainpool.id}"
+# }
 
-  num_cpus = 2
-  memory   = 1024
-  guest_id = "${data.vsphere_virtual_machine.template.guest_id}"
+# resource "vsphere_virtual_machine" "vm" {
 
-  scsi_type = "${data.vsphere_virtual_machine.template.scsi_type}"
+#   name             = "terraform-test"
+#   resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
+#   datastore_id     = "${data.vsphere_datastore.datastore.id}"
 
-  network_interface {
-    network_id = "${data.vsphere_network.network.id}"
-  }
+#   num_cpus = 2
+#   memory   = 1024
+#   guest_id = "${data.vsphere_virtual_machine.template.guest_id}"
 
-  disk {
-    label = "disk0"
-    size  = "${data.vsphere_virtual_machine.template.disks.0.size}"
-  }
+#   scsi_type = "${data.vsphere_virtual_machine.template.scsi_type}"
+
+#   network_interface {
+#     network_id = "${data.vsphere_network.network.id}"
+#   }
+
+#   disk {
+#     label = "disk0"
+#     size  = "${data.vsphere_virtual_machine.template.disks.0.size}"
+#   }
   # clone {
   #   template_uuid = "${data.vsphere_virtual_machine.template.id}"
  
@@ -75,4 +86,4 @@ resource "vsphere_virtual_machine" "vm" {
   # }
 
 
-}
+# }
