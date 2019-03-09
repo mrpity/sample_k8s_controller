@@ -9,7 +9,7 @@ spec:
     kind: Deployment
     name: php-apache
   minReplicas: 2
-  maxReplicas: 20
+  maxReplicas: 5
   metrics:
   - type: Object
     object:
@@ -18,5 +18,5 @@ spec:
         apiVersion: v1
         kind: Service
         name: confluentic-kafka-exporter
-      targetValue: 17
+      targetValue: 2
 
