@@ -39,12 +39,12 @@ variable "vm_name" {
   default = "terraform-test"
 }
 variable "vm_cpu_resources" {
-  type = "int"
-  default = 1
+  type = "string"
+  default = "1"
 }
 variable "vm_mem_resources" {
-  type = "int"
-  default = 1024
+  type = "string"
+  default = "1024"
 }
 variable "vm_disk_label" {
   type = "string"
@@ -63,8 +63,8 @@ variable "vm_customize_network_ip" {
   default = "10.1.20.158"
 }
 variable "vm_customize_network_mask" {
-  type = "int"
-  default = 24
+  type = "string"
+  default = "24"
 }
 variable "vm_customize_network_gateway" {
   type = "string"
