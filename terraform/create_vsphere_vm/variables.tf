@@ -30,7 +30,7 @@ variable "virtual_machine_dns_servers" {
 # Adjust settings
 #########################################
 
-variable "vsphere_vm_fodler" {
+variable "vsphere_vm_folder" {
   type = "string"
   default = "/CustomerVM/WSEC"
 }
