@@ -36,23 +36,23 @@ variable "vsphere_vm_folder" {
 }
 variable "vm_name" {
   type = "string"
-  default = "terraform-test"
+  default = "elastisearch-performance"
+}
+variable "vm_customize_host_name" {
+  type = "string"
+  default = "elastisearch-performance"
 }
 variable "vm_cpu_resources" {
   type = "string"
-  default = "1"
+  default = "4"
 }
 variable "vm_mem_resources" {
   type = "string"
-  default = "1024"
+  default = "4096"
 }
 variable "vm_disk_label" {
   type = "string"
   default = "disk0"
-}
-variable "vm_customize_host_name" {
-  type = "string"
-  default = "terraform-test"
 }
 variable "vm_customize_domain" {
   type = "string"
