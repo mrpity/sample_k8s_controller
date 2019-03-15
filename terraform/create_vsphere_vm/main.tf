@@ -1,11 +1,3 @@
-provider "vsphere" {
-  user           = "${var.vsphere_user}"
-  password       = "${var.vsphere_password}"
-  vsphere_server = "${var.vsphere_server}"
-
-  # If you have a self-signed cert
-  allow_unverified_ssl = true
-}
 
 data "vsphere_datacenter" "dc" {
   name = "${var.vsphere_datacenter}"
@@ -40,6 +32,7 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id         = "${data.vsphere_virtual_machine.template.guest_id}"
   scsi_type        = "${data.vsphere_virtual_machine.template.scsi_type}"
   folder           = "${var.vsphere_vm_folder}"
+  #user_data        = "${file("${path.module}/scripts/ssm-resize.sh")}"
 
   network_interface {
     network_id = "${data.vsphere_network.network.id}"
@@ -50,6 +43,12 @@ resource "vsphere_virtual_machine" "vm" {
     size             = "${data.vsphere_virtual_machine.template.disks.0.size}"
     eagerly_scrub    = "${data.vsphere_virtual_machine.template.disks.0.eagerly_scrub}"
     thin_provisioned = "${data.vsphere_virtual_machine.template.disks.0.thin_provisioned}"
+  }
+
+  disk {
+    label            = "${var.vm_disk_label_1}"
+    size             = "${var.vm_disk_size_1}"
+    unit_number      = "${var.vm_disk_unit_number_1}"
   }
 
   clone {
@@ -64,6 +63,7 @@ resource "vsphere_virtual_machine" "vm" {
       network_interface {
         ipv4_address = "${var.vm_customize_network_ip}"
         ipv4_netmask = "${var.vm_customize_network_mask}"
+        dns_server_list  = "${var.virtual_machine_dns_servers}"
       }
 
       ipv4_gateway = "${var.vm_customize_network_gateway}"

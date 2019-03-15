@@ -66,6 +66,19 @@ variable "vm_disk_label" {
   default = "disk0"
 }
 
+variable "vm_disk_label_1" {
+  type    = "string"
+  default = "disk1"
+}
+
+variable "vm_disk_size_1" {
+  type    = "string"
+  default = "50"
+}
+variable "vm_disk_unit_number_1" {
+  type    = "string"
+  default = "1"
+}
 variable "vm_customize_domain" {
   type    = "string"
   default = "dev.whirl.sg"
