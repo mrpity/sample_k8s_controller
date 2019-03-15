@@ -11,7 +11,7 @@ module "vsphere-vm-rke06" {
 
   vm_customize_network_ip = "10.1.20.158"
 
-  vsphere_server   = {}
-  vsphere_user     = {}
-  vsphere_password = {}
+  vsphere_server   = ""
+  vsphere_user     = ""
+  vsphere_password = ""
 }
