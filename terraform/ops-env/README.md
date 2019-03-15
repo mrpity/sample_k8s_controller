@@ -4,6 +4,7 @@
 main.tf --- main terraform file (primary entrypoint)
 
 terraform.tfstate --- autocreated file with current env state (after applying main.tf, see below)
+terraform.tfvars --- file with sensetive data. It will ignore by git, but terraform will use it
 .terraform --- dir with plugins for terrform and etc (appear after initialization: terraform init)
 
 #################################################
