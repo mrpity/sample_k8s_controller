@@ -1,3 +1,5 @@
+NOTE: We should update dns records before env creating! :(
+
 #################################################
 #Folder structure:
 #################################################

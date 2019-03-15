@@ -52,15 +52,16 @@ resource "vsphere_virtual_machine" "vm" {
     template_uuid = "${data.vsphere_virtual_machine.template.id}"
 
     customize {
+      dns_server_list = "${var.virtual_machine_dns_servers}"
+
       linux_options {
         host_name = "${var.vm_customize_host_name}"
         domain    = "${var.vm_customize_domain}"
       }
 
       network_interface {
-        ipv4_address    = "${var.vm_customize_network_ip}"
-        ipv4_netmask    = "${var.vm_customize_network_mask}"
-        dns_server_list = "${var.virtual_machine_dns_servers}"
+        ipv4_address = "${var.vm_customize_network_ip}"
+        ipv4_netmask = "${var.vm_customize_network_mask}"
       }
 
       ipv4_gateway = "${var.vm_customize_network_gateway}"

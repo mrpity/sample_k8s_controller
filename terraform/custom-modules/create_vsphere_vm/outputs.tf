@@ -1,4 +1,4 @@
-output "iaas" {
+output "iaac" {
   value = "vsphere"
 }
 

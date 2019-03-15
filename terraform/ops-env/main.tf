@@ -1,7 +1,7 @@
-module "vsphere-vm-rke06" {
+module "vsphere-vm-rke01" {
   source = "../custom-modules/create_vsphere_vm"
 
-  vm_name                = "elastisearch-performance"
+  vm_name                = "rke01.dev.whirl.sg"
   vm_customize_host_name = "elastisearch-performance"
 
   vm_cpu_resources = "4"
@@ -9,7 +9,7 @@ module "vsphere-vm-rke06" {
 
   vm_disk_size_1 = "50"
 
-  vm_customize_network_ip = "10.1.20.158"
+  vm_customize_network_ip = "10.1.20.151"
 
   vsphere_server   = "${var.vsphere_server}"
   vsphere_user     = "${var.vsphere_user}"
