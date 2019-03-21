@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: changeme
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/mrpity/sample-k8s-controller:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/mrpity/sample-k8s-controller:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: sample-k8s-controller
+        chartPath: charts/sample-k8s-controller
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/mrpity/sample-k8s-controller'
+          image.tag: '{{.DIGEST_HEX}}'
