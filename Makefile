@@ -15,6 +15,9 @@ all: build
 
 check: fmt build test
 
+get:
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) get -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
+
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
