@@ -1,14 +1,14 @@
-resource "aws_key_pair" "mykey" {
-  key_name   = "mykey"
+resource "aws_key_pair" "sa_key" {
+  key_name   = "sa_key"
   public_key = "${file("${var.PATH_TO_PUBLIC_KEY}")}"
 }
 
-resource "aws_instance" "proxy" {
+resource "aws_instance" "test_instance" {
   ami                    = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type          = "t2.micro"
-  key_name               = "${aws_key_pair.mykey.key_name}"
+  key_name               = "${aws_key_pair.sa_key.key_name}"
   vpc_security_group_ids = ["${aws_security_group.from_office.id}"]
-  count                  = "${var.INSTANCE_NODE_COUNT}"
+  count = "${var.INSTANCE_NODE_COUNT}"
 
   provisioner "file" {
     source      = "script.sh"
@@ -16,8 +16,8 @@ resource "aws_instance" "proxy" {
   }
 
   provisioner "file" {
-    source      = "/home/dkhodakivsky/Documents/ansible2.4.1/ecdsa-wsec-deployment.pub"
-    destination = "/tmp/ecdsa-wsec-deployment.pub"
+    source      = "${var.PATH_TO_SA_PUBLIC_KEY}"
+    destination = "/tmp/sa.pub"
   }
 
   provisioner "remote-exec" {
@@ -33,6 +33,6 @@ resource "aws_instance" "proxy" {
   }
 
   tags {
-    work = "pity"
+    work = "test-env"
   }
 }

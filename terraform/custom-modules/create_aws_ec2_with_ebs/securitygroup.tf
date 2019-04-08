@@ -1,8 +1,8 @@
 #---------------------------------------------------
 # Create security group
 #---------------------------------------------------
-resource "aws_security_group" "from_office" {
-  name        = "from_office"
+resource "aws_security_group" "test-env" {
+  name        = "test-env"
   description = "Allow all inbound traffic from office and DC"
 
   # allow traffic for TCP 22
@@ -22,7 +22,7 @@ resource "aws_security_group" "from_office" {
   }
 
   tags {
-    work = "pity"
+    work = "test-env"
   }
 }
 
@@ -32,18 +32,18 @@ resource "aws_security_group" "from_office" {
 resource "aws_security_group_rule" "ingress_ports" {
   type              = "ingress"
   count             = "${length(var.allowed_ports)}"
-  security_group_id = "${aws_security_group.from_office.id}"
-  from_port         = "${element(var.allowed_ports, count.index)}"
-  to_port           = "${element(var.allowed_ports, count.index)}"
-  protocol          = "tcp"
+  security_group_id = "${aws_security_group.test-env.id}"
+  from_port         =  0
+  to_port           =  0
+  protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "ingress_default_aws" {
   type              = "ingress"
-  security_group_id = "${aws_security_group.from_office.id}"
-  from_port         = 0
-  to_port           = 0
+  security_group_id = "${aws_security_group.test-env.id}"
+  from_port   	    = 0
+  to_port     	    = 0
   protocol          = "-1"
   cidr_blocks       = ["172.31.0.0/16"]
 }
