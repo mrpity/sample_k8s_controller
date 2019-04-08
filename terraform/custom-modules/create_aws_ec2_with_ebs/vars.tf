@@ -18,11 +18,11 @@ variable "INSTANCE_USERNAME" {
 }
 
 variable "INSTANCE_NODE_COUNT" {
-  default = "2"
+  default = "1"
 }
 
 variable "ADDITIONAL_EBS_DISK_SIZE" {
-  default = "1"
+  default = 1
 }
 
 
@@ -36,4 +36,10 @@ variable "AMIS" {
   default = {
     eu-west-1 = "ami-0204cddbf060b2420"
   }
+}
+
+
+variable "office_ips" {
+  type    = "list"
+  default = ["46.182.85.2/32", "193.193.201.94/32"]
 }

@@ -31,7 +31,7 @@ resource "aws_security_group" "test-env" {
 #---------------------------------------------------
 resource "aws_security_group_rule" "ingress_ports" {
   type              = "ingress"
-  count             = "${length(var.allowed_ports)}"
+  //count             = "${length(var.allowed_ports)}"
   security_group_id = "${aws_security_group.test-env.id}"
   from_port         =  0
   to_port           =  0

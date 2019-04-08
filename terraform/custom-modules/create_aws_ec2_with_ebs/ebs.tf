@@ -3,6 +3,7 @@ resource "aws_ebs_volume" "vol_generic_data" {
   availability_zone = "${var.AWS_REGION}a"
   count             = "${var.INSTANCE_NODE_COUNT}"
   size              = "${var.ADDITIONAL_EBS_DISK_SIZE}"
+  //size              = 1
 }
 
 resource "aws_volume_attachment" "ebs_att" {
