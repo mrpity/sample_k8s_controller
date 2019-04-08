@@ -21,6 +21,11 @@ variable "INSTANCE_NODE_COUNT" {
   default = "1"
 }
 
+variable "INSTANCE_TYPE" {
+  default = "t2.micro"
+}
+
+
 variable "ADDITIONAL_EBS_DISK_SIZE" {
   default = 1
 }

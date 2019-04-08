@@ -5,10 +5,12 @@ resource "aws_key_pair" "sa_key" {
 
 resource "aws_instance" "test_instance" {
   ami                    = "${lookup(var.AMIS, var.AWS_REGION)}"
-  instance_type          = "t2.micro"
+  instance_type          = "${var.INSTANCE_TYPE}"
   key_name               = "${aws_key_pair.sa_key.key_name}"
   vpc_security_group_ids = ["${aws_security_group.test-env.id}"]
   count = "${var.INSTANCE_NODE_COUNT}"
+
+
 
   provisioner "file" {
     source      = "script.sh"
