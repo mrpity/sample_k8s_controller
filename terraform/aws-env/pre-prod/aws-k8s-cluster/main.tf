@@ -2,6 +2,25 @@
 #---------------------------------------------------
 # MAINTAINER Dmitriy Khodakivsky "d.khodakivsky@whirl.sg"
 #---------------------------------------------------
+
+module "aws-custom-security-group" {
+    source                              = "../../../custom-modules/create_aws_sec_group"
+    AWS_REGION                          = "eu-west-1"
+
+    AWS_ACCESS_KEY                      = "${var.AWS_ACCESS_KEY}"
+    AWS_SECRET_KEY                      = "${var.AWS_SECRET_KEY}"
+
+}
+
+module "aws-key-pair" {
+    source                              = "../../../custom-modules/create_aws_key_pair"
+    AWS_REGION                          = "eu-west-1"
+
+    AWS_ACCESS_KEY                      = "${var.AWS_ACCESS_KEY}"
+    AWS_SECRET_KEY                      = "${var.AWS_SECRET_KEY}"
+
+}
+
 module "k8s-cluster-masters" {
     source                              = "../../../custom-modules/create_aws_ec2_with_ebs"
     AWS_REGION                          = "eu-west-1"

@@ -1,11 +1,11 @@
+
+
 resource "aws_instance" "test_instance" {
   ami                    = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type          = "${var.INSTANCE_TYPE}"
-  key_name               = "${aws_key_pair.sa_key.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.test-env.id}"]
+  key_name               = "${var.sa_key_name}"
+  security_groups = ["${var.sa_security_group_id}"]
   count = "${var.INSTANCE_NODE_COUNT}"
-
-
 
   provisioner "file" {
     source      = "script.sh"

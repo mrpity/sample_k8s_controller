@@ -21,6 +21,12 @@ variable "INSTANCE_NODE_COUNT" {
   default = "1"
 }
 
+variable "INSTANCE_AWS_KEY_PAIR_NAME" {
+  default = "test-env"
+  
+}
+
+
 variable "INSTANCE_TYPE" {
   default = "t2.micro"
 }
@@ -48,3 +54,12 @@ variable "office_ips" {
   type    = "list"
   default = ["46.182.85.2/32", "193.193.201.94/32"]
 }
+
+
+variable "sa_key_name" {
+  default = "sa_key"
+}
+variable "sa_security_group_id" {
+  default = "test-env"  
+}
+
