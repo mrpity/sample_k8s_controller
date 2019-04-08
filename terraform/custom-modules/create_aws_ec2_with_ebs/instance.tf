@@ -4,7 +4,7 @@ resource "aws_instance" "test_instance" {
   ami                    = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type          = "${var.INSTANCE_TYPE}"
   key_name               = "${var.sa_key_name}"
-  security_groups = ["${var.sa_security_group_id}"]
+  vpc_security_group_ids = ["${var.sa_security_group_id}"]
   count = "${var.INSTANCE_NODE_COUNT}"
 
   provisioner "file" {
