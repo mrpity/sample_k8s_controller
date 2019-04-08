@@ -25,6 +25,8 @@ module "k8s-cluster-masters" {
     source                              = "../../../custom-modules/create_aws_ec2_with_ebs"
     AWS_REGION                          = "eu-west-1"
     INSTANCE_TYPE                       = "t2.micro"
+    sa_security_group_id                =  "${module.aws-custom-security-group.security_group_id}"
+    sa_key_name                         =  "${module.aws-key-pair.sa_key_name}"
     
     #----------------------------------------------------------------------------
     # https://aws.amazon.com/ec2/instance-types/
@@ -45,6 +47,8 @@ module "k8s-cluster-workers" {
     source                              = "../../../custom-modules/create_aws_ec2_with_ebs"
     AWS_REGION                          = "eu-west-1"
     INSTANCE_TYPE                       = "t2.micro"
+    sa_security_group_id                =  "${module.aws-custom-security-group.security_group_id}"
+    sa_key_name                         =  "${module.aws-key-pair.sa_key_name}"
     
     #----------------------------------------------------------------------------
     # https://aws.amazon.com/ec2/instance-types/

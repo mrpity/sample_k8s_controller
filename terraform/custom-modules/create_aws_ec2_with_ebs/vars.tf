@@ -56,10 +56,6 @@ variable "office_ips" {
 }
 
 
-variable "sa_key_name" {
-  default = "sa_key"
-}
-variable "sa_security_group_id" {
-  default = "test-env"  
-}
+variable "sa_key_name" {}
+variable "sa_security_group_id" {}
 
