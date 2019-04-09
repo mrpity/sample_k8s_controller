@@ -12,3 +12,7 @@ variable "PATH_TO_PRIVATE_KEY" {
 variable "PATH_TO_PUBLIC_KEY" {
   default = "admin_user_key.pub"
 }
+
+variable "AWS_KEY_NAME" {
+  default = "sa_key"
+}

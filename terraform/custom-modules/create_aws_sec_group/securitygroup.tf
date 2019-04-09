@@ -2,7 +2,7 @@
 # Create security group
 #---------------------------------------------------
 resource "aws_security_group" "test-env" {
-  name        = "test-env"
+  name        = "${var.AWS_SECURITY_GROUP_NAME}"
   description = "Allow all inbound traffic from office and DC"
 
   # allow traffic for TCP 22
@@ -22,7 +22,7 @@ resource "aws_security_group" "test-env" {
   }
 
   tags {
-    work = "test-env"
+    env-type = "${var.INSTANCE_AWS_TAG}"
   }
 }
 

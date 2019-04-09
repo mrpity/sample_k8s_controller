@@ -30,6 +30,6 @@ resource "aws_instance" "test_instance" {
   }
 
   tags {
-    work = "test-env"
+    env-type = "${var.INSTANCE_AWS_TAG}"
   }
 }

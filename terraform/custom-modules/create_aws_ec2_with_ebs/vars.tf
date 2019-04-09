@@ -59,3 +59,6 @@ variable "office_ips" {
 variable "sa_key_name" {}
 variable "sa_security_group_id" {}
 
+variable "INSTANCE_AWS_TAG" {
+  default = "pity"
+}
