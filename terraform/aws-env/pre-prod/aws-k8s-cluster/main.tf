@@ -113,9 +113,9 @@ module "ceph-system-osds" {
     # t3.2xlarge: 8 CPU, 32 GB MEM, 8 GB DISK -- default ($0.3328/hour)
     #----------------------------------------------------------------------------
 
-    INSTANCE_NODE_COUNT                 = "5"
+    INSTANCE_NODE_COUNT                 = "3"
 
-    ADDITIONAL_EBS_DISK_SIZE            = "50"
+    ADDITIONAL_EBS_DISK_SIZE            = "500"
 
     AWS_ACCESS_KEY                      = "${var.AWS_ACCESS_KEY}"
     AWS_SECRET_KEY                      = "${var.AWS_SECRET_KEY}"
@@ -164,9 +164,9 @@ module "ceph-media-osds" {
     # t3.2xlarge: 8 CPU, 32 GB MEM, 8 GB DISK -- default ($0.3328/hour)
     #----------------------------------------------------------------------------
 
-    INSTANCE_NODE_COUNT                 = "5"
+    INSTANCE_NODE_COUNT                 = "3"
 
-    ADDITIONAL_EBS_DISK_SIZE            = "50"
+    ADDITIONAL_EBS_DISK_SIZE            = "500"
 
     AWS_ACCESS_KEY                      = "${var.AWS_ACCESS_KEY}"
     AWS_SECRET_KEY                      = "${var.AWS_SECRET_KEY}"
