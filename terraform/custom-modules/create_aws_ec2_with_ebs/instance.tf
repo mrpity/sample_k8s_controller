@@ -5,7 +5,9 @@ resource "aws_instance" "test_instance" {
   instance_type          = "${var.INSTANCE_TYPE}"
   key_name               = "${var.sa_key_name}"
   vpc_security_group_ids = ["${var.sa_security_group_id}"]
-  count = "${var.INSTANCE_NODE_COUNT}"
+  availability_zone      = "${var.AWS_REGION}a"
+  count                  = "${var.INSTANCE_NODE_COUNT}"
+
 
   provisioner "file" {
     source      = "script.sh"
