@@ -24,7 +24,7 @@ module "aws-key-pair" {
 module "k8s-cluster-masters" {
     source                              = "../../../custom-modules/create_aws_ec2_with_ebs"
     AWS_REGION                          = "eu-west-1"
-    INSTANCE_TYPE                       = "t2.micro"
+    INSTANCE_TYPE                       = "t2.medium"
     sa_security_group_id                =  "${module.aws-custom-security-group.security_group_id}"
     sa_key_name                         =  "${module.aws-key-pair.sa_key_name}"
     INSTANCE_AWS_TAG                    = "k8s-cluster-master"
@@ -33,10 +33,11 @@ module "k8s-cluster-masters" {
     #----------------------------------------------------------------------------
     # https://aws.amazon.com/ec2/instance-types/
     # t2.micro: 1 CPU (6 credits/hour), 1 GB MEM, 8 GB DISK -- default ($0.0116)
+    # t2.medium: 2 CPU (24 credits/hour), 4 GB MEM, 8 GB DISK -- default ($0,0464)
     # c5.xlarge: 4 CPU, 8 GB MEM, 8 GB DISK -- default ($0.1700)
     #----------------------------------------------------------------------------
 
-    INSTANCE_NODE_COUNT                 = "10"
+    INSTANCE_NODE_COUNT                 = "3"
 
     ADDITIONAL_EBS_DISK_SIZE            = "1"
 
@@ -48,7 +49,7 @@ module "k8s-cluster-masters" {
 module "k8s-cluster-workers" {
     source                              = "../../../custom-modules/create_aws_ec2_with_ebs"
     AWS_REGION                          = "eu-west-1"
-    INSTANCE_TYPE                       = "t2.nano"
+    INSTANCE_TYPE                       = "c5.4xlarge"
     sa_security_group_id                =  "${module.aws-custom-security-group.security_group_id}"
     sa_key_name                         =  "${module.aws-key-pair.sa_key_name}"
     INSTANCE_AWS_TAG                    = "k8s-cluster-worker"
@@ -57,6 +58,7 @@ module "k8s-cluster-workers" {
     # https://aws.amazon.com/ec2/instance-types/
     # t2.micro: 1 CPU (6 credits/hour), 1 GB MEM, 8 GB DISK -- default ($0.0116)
     # c5.4xlarge: 16 CPU, 32 GB MEM, 8 GB DISK -- default ($0.6800)
+    # t2.medium: 2 CPU (24 credits/hour), 4 GB MEM, 8 GB DISK -- default ($0,0464)
     # t3.2xlarge: 8 CPU, 32 GB MEM, 8 GB DISK -- default ($0.3328/hour)
     #----------------------------------------------------------------------------
 
