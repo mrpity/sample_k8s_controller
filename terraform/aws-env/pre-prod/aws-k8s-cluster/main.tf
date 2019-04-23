@@ -37,7 +37,7 @@ module "k8s-cluster-masters" {
     # c5.xlarge: 4 CPU, 8 GB MEM, 8 GB DISK -- default ($0.1700)
     #----------------------------------------------------------------------------
 
-    INSTANCE_NODE_COUNT                 = "3"
+    INSTANCE_NODE_COUNT                 = "10"
 
     ADDITIONAL_EBS_DISK_SIZE            = "1"
 
