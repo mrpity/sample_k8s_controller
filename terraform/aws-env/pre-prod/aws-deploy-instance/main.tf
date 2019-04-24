@@ -40,7 +40,7 @@ module "deploy-instance" {
 
     INSTANCE_NODE_COUNT                 = "1"
 
-
+    ROOT_VOLUME_SIZE                    = "15"
     ADDITIONAL_EBS_DISK_SIZE            = "1"
 
 

@@ -10,7 +10,7 @@ variable "PATH_TO_PUBLIC_KEY" {
 }
 
 variable "PATH_TO_SA_PUBLIC_KEY" {
-  default = "/home/dkhodakivsky/Documents/github/wsec_devops_generic/ansible.play/files/ecdsa-wsec-deployment.pub"
+  default = "/home/dkhodakivsky/Documents/ansible2.4.1/ecdsa-wsec-deployment.pub"
 }
 
 variable "INSTANCE_USERNAME" {
@@ -32,6 +32,13 @@ variable "INSTANCE_TYPE" {
 }
 
 
+variable "ROOT_VOLUME_SIZE" {
+  default = 10
+}
+
+variable "ROOT_VOLUME_TYPE" {
+  default = "standard"
+}
 variable "ADDITIONAL_EBS_DISK_SIZE" {
   default = 1
 }

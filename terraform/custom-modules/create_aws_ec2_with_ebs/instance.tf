@@ -9,6 +9,11 @@ resource "aws_instance" "test_instance" {
   count                  = "${var.INSTANCE_NODE_COUNT}"
 
 
+  root_block_device {
+    volume_size = "${var.ROOT_VOLUME_SIZE}"
+    volume_type = "${var.ROOT_VOLUME_TYPE}"
+  }
+
   provisioner "file" {
     source      = "script.sh"
     destination = "/tmp/script.sh"
